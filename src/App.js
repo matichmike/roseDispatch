@@ -3,10 +3,40 @@ import './App.css';
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import Typography from "@material-ui/core/Typography";
+import EventCalendar from './components/EventCalendar'
 
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
 function App() {
+  const [drivers, setDrivers] = useState([
+    {'John':[{
+      taskName: 'pickup', 
+      date: new Date()}]},
+    {'Ben':[{
+      taskName: 'pickup', 
+      date: new Date()}]},
+    {'Ken':[{
+      taskName: 'pickup', 
+      date: new Date()}]}
+  ]
+  )
+
+  function addTask(driverName) {
+    const newTask = {taskname: 'dropoff', date: new Date()};
+    const driverIndex = drivers.map( driver => Object.keys(driver)[0]).indexOf(driverName);
+    const driver = {...drivers[driverIndex]};
+    console.log(driver);
+    driver[driverName].push(newTask);
+    const driverCopy = [...drivers];
+    driverCopy[driverIndex] = driver; 
+    setDrivers(driverCopy);
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    addTask('John');
+  }
+
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -43,15 +73,30 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
+      <form>
+        <select name="Drivers" id="Drivers">
+        <option value="Driver Selection">Driver Selection</option>
+        <option value="John">John</option>
+        <option value="Ben">Ben</option>
+        <option value="Ken">Ken</option>
+        </select>
+        <button onClick={handleClick}>
+          add task
+        </button>
+      </form>
+    <EventCalendar />
+    </div>
+  );
+}
+
+export default App;
+
+{/* <div className="App">
         <Typography style={{padding: 16}} variant="h1">rosedispatch</Typography>
         <TodoForm addTodo={addTodo} />
         <TodoList 
         todos={todos} 
         toggleComplete={toggleComplete} 
         removeTodo={removeTodo}/>
-    </div>
-  );
-}
-
-export default App;
+    </div> */}
