@@ -3,33 +3,82 @@ import './App.css';
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import Typography from "@material-ui/core/Typography";
-import EventCalendar from './components/EventCalendar'
+import {v4 as uuid} from "uuid";
+import buildYear from "./components/buildYear";
 
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
+// {
+
+//   state: {
+//     drivers: [
+//       {'John':[{
+//         taskName: 'pickup', 
+//         date: new Date()}]},
+//       {'Ben':[{
+//         taskName: 'pickup', 
+//         date: new Date()}]},
+//       {'Ken':[{
+//         taskName: 'pickup', 
+//         date: new Date()}]}
+//     ]
+//   }
+// 
+//   setDrivers: () => { .... }
+// 
+// }
+
+
+
+class Task {
+  constructor(name, location, description, id) {
+    this.name = name;
+    this.location = location;
+    this.description = description;
+    this.id = id;
+  }
+
+  addTask(task) {
+    
+  }
+}
+
 
 function App() {
-  const [drivers, setDrivers] = useState([
-    {'John':[{
-      taskName: 'pickup', 
-      date: new Date()}]},
-    {'Ben':[{
-      taskName: 'pickup', 
-      date: new Date()}]},
-    {'Ken':[{
-      taskName: 'pickup', 
-      date: new Date()}]}
-  ]
-  )
+  const initialTasks = [
+    {
+      1: {
+        driver: "John",
+        task: "Pick-up",
+        location: "Toronto",
+        description: "Refrigerators x10, Washing Machines x20"
+      }
+    }
+  ];
+
+  const initialDrivers = {
+    John: [],
+    Ben: [],
+    Ken: []
+  };
+
+  const [tasks, setTasks] = useState(initialTasks);
+
+  const [drivers, setDrivers] = useState(initialDrivers);
+
+  const initialYear = buildYear();
+
+  const [year, setYear] = useState(initialYear);
+  
+  
 
   function addTask(driverName) {
     const newTask = {taskname: 'dropoff', date: new Date()};
-    const driverIndex = drivers.map( driver => Object.keys(driver)[0]).indexOf(driverName);
-    const driver = {...drivers[driverIndex]};
-    console.log(driver);
-    driver[driverName].push(newTask);
-    const driverCopy = [...drivers];
-    driverCopy[driverIndex] = driver; 
-    setDrivers(driverCopy);
+    const driver = drivers[driverName];
+    const driverCopy = [...driver].push(newTask);
+    setDrivers({
+      ...drivers,
+      [driverName]: driverCopy
+    });
   }
 
   function handleClick(event) {
@@ -85,7 +134,6 @@ function App() {
           add task
         </button>
       </form>
-    <EventCalendar />
     </div>
   );
 }
