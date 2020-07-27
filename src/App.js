@@ -135,14 +135,10 @@ const AddDriverTask = ({ viewModel }) => {
       <select ref={hourFromSelect} name="Hour From">
             <option>From</option>
             { hoursRangeSelect.map((i) => <option> {i}:00 </option> )}
-            
-            
-            
       </select>
       <select ref={hourToSelect} name="Hour To">
             <option>To</option>
             { hoursRangeSelect.map((i) => <option> {i}:00 </option> )}
-            
       </select>
       {/* todo: 1) day selector 2) hour selector I have problem with value?*/}
       <input ref={locationInput} name="location" type="text" placeholder="Location" />
