@@ -82,22 +82,22 @@ for (let singleHour = 0; singleHour < 24; singleHour++) {
 const WeekToggle = observer(({ viewModel }) => {
   return (
     <div>
-      <button onClick={() => {
+      <button className='btn btn-primary' onClick={() => {
         if(viewModel.activeWeek<2) {
           return;
         }
         viewModel.activeWeek--
       }}>
-        Back
+        &#8592; Back
       </button>
       <label for="week">Week {viewModel.activeWeek}</label>
-      <button onClick={() => {
+      <button className='btn btn-success' onClick={() => {
         if(viewModel.activeWeek>51) {
           return;
         }
         viewModel.activeWeek++
       }}>
-        Forward
+        Forward &#8594;
       </button>
     </div>
     )
@@ -134,13 +134,13 @@ const AddDriverTask = ({ viewModel }) => {
 
   return (
     <>
-      <select ref={typeInput} name="Task Type">
+      <select required className="form-control" ref={typeInput} name="Task Type">
             <option>Select Task Type</option>
             <option value="Pick-up">Pick-Up</option>
             <option value="Drop-off">Drop-Off</option>
             <option value="Other">Other</option>
       </select>
-      <select ref={daySelectInput} name="Day Selection">
+      <select required className="form-control" ref={daySelectInput} name="Day Selection">
             <option>Select Day</option>
             <option value="0">Monday</option>
             <option value="1">Tuesday</option>
@@ -150,17 +150,17 @@ const AddDriverTask = ({ viewModel }) => {
             <option value="5">Saturday</option>
             <option value="6">Sunday</option>
       </select>
-      <select ref={hourFromSelect} name="Hour From">
+      <select required className="form-control" ref={hourFromSelect} name="Hour From">
             <option>From</option>
             { hoursRangeSelect.map((i) => <option> {i}:00 </option> )}
       </select>
-      <select ref={hourToSelect} name="Hour To">
+      <select required className="form-control" ref={hourToSelect} name="Hour To">
             <option>To</option>
             { hoursRangeSelect.map((i) => <option> {i}:00 </option> )}
       </select>
       {/* todo: 1) day selector 2) hour selector I have problem with value?*/}
-      <input ref={locationInput} name="location" type="text" placeholder="Location" />
-      <input ref={descriptionInput} name="description" type="text" placeholder="Description" />
+      <input required ref={locationInput} name="location" type="text" placeholder="Location" />
+      <input required ref={descriptionInput} name="description" type="text" placeholder="Description" />
       <button  onClick={() => {
         const type = typeInput.current.value;
         if (!type) {

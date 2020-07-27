@@ -1,6 +1,22 @@
 body {
   width: 100%;
 }
+body table, body th, body td {
+  width: 4rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+body th {
+  background: lightblue;
+  border-color: white;
+}
+body tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+body tr:hover {
+  background-color: bisque;
+}
 body .Page {
   display: flex;
   flex-direction: column;
