@@ -40,26 +40,24 @@ const getTaskByDayTime = (viewModel, day, hour) => {
 const DriverTimeTable = observer(({ viewModel }) =>{
   
   const rows = [];
-  for (let hour = 0; hour < 24; ++hour) {
-    const columns = [<td>{hour + 1}:00</td>];
+  for (let hour = 0; hour < 25; ++hour) {
+    const columns = [<td>{hour}:00</td>];
     for (let day = 0; day < 7; ++day) {
         //.... todo: 
       let task = getTaskByDayTime(viewModel, day, hour);  
       if (task) {
         task = <div>{task.type} - {task.description}</div>
       }
-      columns.push(<td>{task || 'No task'}</td>)
+      columns.push(<td>{task || '-'}</td>)
     }
     rows.push(<tr>
       {columns}
     </tr>)
   }
 
-
-
   return (
     <div>
-      <table className="Schedule-table" style={{ border: 1 }}>
+      <table>
         <tr>
           <th></th>
           <th>Monday</th>
@@ -92,7 +90,7 @@ const WeekToggle = observer(({ viewModel }) => {
       }}>
         Back
       </button>
-      <label for="week">{viewModel.activeWeek}</label>
+      <label for="week">Week {viewModel.activeWeek}</label>
       <button onClick={() => {
         if(viewModel.activeWeek>51) {
           return;
@@ -105,6 +103,26 @@ const WeekToggle = observer(({ viewModel }) => {
     )
 })
 
+const DriverScheduleCSV = ({ viewModel }) => {
+  const scheduleInput = React.useRef();
+
+  return (
+    <div>
+      <select ref={scheduleInput} name="Schedule Input">
+        <option value="2">2 days</option>
+        <option value="4">4 days</option>
+        <option value="7">7 days</option>
+        <option value="14">14 days</option>
+        <option value="28">28 days</option>
+      </select>
+      <button>
+        Download Schedule
+      </button>
+
+    </div>
+  )
+}
+
 const AddDriverTask = ({ viewModel }) => {
 
   const typeInput = React.useRef();
@@ -115,7 +133,7 @@ const AddDriverTask = ({ viewModel }) => {
   const hourToSelect = React.useRef();
 
   return (
-    <div>
+    <>
       <select ref={typeInput} name="Task Type">
             <option>Select Task Type</option>
             <option value="Pick-up">Pick-Up</option>
@@ -190,7 +208,7 @@ const AddDriverTask = ({ viewModel }) => {
 
         });
       }}>Add new task</button>
-    </div>
+    </>
   )
 }
 
@@ -209,25 +227,29 @@ function App() {
   }));
 
   return (
-    <div>
-      <p>Driver Schedule</p>
+    <div className="Page">
+    <div className="Control-Panel">
+    <div className="Driver-Schedule">
+      <label>Driver: </label>
       <DriverSelector viewModel={viewModel}></DriverSelector>
-
-      <div>
-        <p>Week toggle</p>
+      </div>
+      <div className="Week-Toggle">
         <WeekToggle viewModel={viewModel}></WeekToggle>
       </div>
 
-      <div>
-        <AddDriverTask viewModel={viewModel}></AddDriverTask>
-      </div>
-
-      <div>
-        <p>Driver Timetable</p>
-        <DriverTimeTable viewModel={viewModel}></DriverTimeTable>
-      </div>
-
+      <div className="Download-Schedule">
+        <DriverScheduleCSV viewModel={viewModel}></DriverScheduleCSV>
       
+      </div>
+    </div>
+    <div className="Task-And-Timetable">
+      <div className="Add-Task">
+          <AddDriverTask viewModel={viewModel}></AddDriverTask>
+        </div>
+      <div classname="Driver-Timetable">
+          <DriverTimeTable viewModel={viewModel}></DriverTimeTable>
+        </div>
+      </div>
     </div>
   );
 }

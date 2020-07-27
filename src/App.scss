@@ -1,0 +1,45 @@
+body {
+  width: 100%;
+
+  .Page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .Control-Panel {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 1em;
+      
+      .Driver-Schedule {
+        display: flex;
+      }
+      
+      .Week-Toggle {
+        display: flex;
+      }
+
+      .Download-Schedule {
+        display: flex;
+      }
+    }
+
+    .Task-And-Timetable {
+      display: flex;
+      justify-content: space-between;
+      margin: 1em;
+      flex-direction: row;
+      
+      .Add-Task {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .Driver-Timetable {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

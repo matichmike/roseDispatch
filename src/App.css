@@ -1,56 +1,39 @@
-
-.App {
-  text-align: center;
+body {
+  width: 100%;
+}
+body .Page {
   display: flex;
-  height: 100%;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
-
-body,
-html,
-#root {
-  height: 100%;
-}
-
-.todo-form {
+body .Page .Control-Panel {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-between;
+  margin: 1em;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body .Page .Control-Panel .Driver-Schedule {
+  display: flex;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body .Page .Control-Panel .Week-Toggle {
+  display: flex;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body .Page .Control-Panel .Download-Schedule {
+  display: flex;
+}
+body .Page .Task-And-Timetable {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+  flex-direction: row;
+}
+body .Page .Task-And-Timetable .Add-Task {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+body .Page .Task-And-Timetable .Driver-Timetable {
+  display: flex;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*# sourceMappingURL=App.css.map */
