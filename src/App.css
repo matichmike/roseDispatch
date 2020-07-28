@@ -27,12 +27,27 @@ body .Page .Control-Panel {
   flex-direction: row;
   justify-content: space-between;
   margin: 1em;
+  height: 38px;
 }
 body .Page .Control-Panel .Driver-Schedule {
   display: flex;
+  justify-content: inherit;
+}
+body .Page .Control-Panel .Driver-Schedule .card-header {
+  display: flex;
+  align-items: center;
+}
+body .Page .Control-Panel .Driver-Schedule .form-control {
+  width: 105px;
 }
 body .Page .Control-Panel .Week-Toggle {
   display: flex;
+  align-items: center;
+}
+body .Page .Control-Panel .Week-Toggle .card-header {
+  height: 38px;
+  display: flex;
+  align-items: center;
 }
 body .Page .Control-Panel .Download-Schedule {
   display: flex;

@@ -9,11 +9,10 @@ const DriverSelector = observer(({ viewModel }) => {
   return (
     <div>
         <form>
-          <select value={viewModel.activeDriver} name="Drivers" id="Drivers" onChange={(e) => {
+          <select className="form-control" value={viewModel.activeDriver} name="Drivers" id="Drivers" onChange={(e) => {
               const value = e.target.value; 
               viewModel.activeDriver = value;
           }}>
-            <option value="Driver Selection">Driver Selection</option>
             { viewModel.drivers.map((driver, i) => <option key={`${driver}-${i}`} value={driver}>{driver}</option> ) }
           </select>
         </form>
@@ -81,25 +80,25 @@ for (let singleHour = 0; singleHour < 24; singleHour++) {
 
 const WeekToggle = observer(({ viewModel }) => {
   return (
-    <div>
+    <>
       <button className='btn btn-primary' onClick={() => {
         if(viewModel.activeWeek<2) {
           return;
         }
         viewModel.activeWeek--
       }}>
-        &#8592; Back
+        &#8592;
       </button>
-      <label for="week">Week {viewModel.activeWeek}</label>
+      <label className='card-header' for="week">Week {viewModel.activeWeek}</label>
       <button className='btn btn-success' onClick={() => {
         if(viewModel.activeWeek>51) {
           return;
         }
         viewModel.activeWeek++
       }}>
-        Forward &#8594;
+        &#8594;
       </button>
-    </div>
+    </>
     )
 })
 
@@ -107,19 +106,19 @@ const DriverScheduleCSV = ({ viewModel }) => {
   const scheduleInput = React.useRef();
 
   return (
-    <div>
-      <select ref={scheduleInput} name="Schedule Input">
+    <>
+      <select className="form-control" ref={scheduleInput} name="Schedule Input">
         <option value="2">2 days</option>
         <option value="4">4 days</option>
         <option value="7">7 days</option>
         <option value="14">14 days</option>
         <option value="28">28 days</option>
       </select>
-      <button>
-        Download Schedule
+      <button className='btn btn-success'>
+        CSV
       </button>
 
-    </div>
+    </>
   )
 }
 
@@ -159,9 +158,9 @@ const AddDriverTask = ({ viewModel }) => {
             { hoursRangeSelect.map((i) => <option> {i}:00 </option> )}
       </select>
       {/* todo: 1) day selector 2) hour selector I have problem with value?*/}
-      <input required ref={locationInput} name="location" type="text" placeholder="Location" />
-      <input required ref={descriptionInput} name="description" type="text" placeholder="Description" />
-      <button  onClick={() => {
+      <input required className="form-control" ref={locationInput} name="location" type="text" placeholder="Location" />
+      <input required className="form-control" ref={descriptionInput} name="description" type="text" placeholder="Description" />
+      <button className='btn btn-success' onClick={() => {
         const type = typeInput.current.value;
         if (!type) {
           return alert('Please select Type first');
@@ -230,7 +229,7 @@ function App() {
     <div className="Page">
     <div className="Control-Panel">
     <div className="Driver-Schedule">
-      <label>Driver: </label>
+      <label class="card-header">Driver:</label>
       <DriverSelector viewModel={viewModel}></DriverSelector>
       </div>
       <div className="Week-Toggle">

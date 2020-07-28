@@ -24,13 +24,28 @@ body {
       flex-direction: row;
       justify-content: space-between;
       margin: 1em;
+      height: 38px;
       
       .Driver-Schedule {
         display: flex;
+        justify-content: inherit;
+        .card-header {
+          display: flex;
+          align-items: center;
+        }
+        .form-control{
+          width: 105px;
+        }
       }
       
       .Week-Toggle {
         display: flex;
+        align-items: center;
+        .card-header {
+          height: 38px;
+          display: flex;
+          align-items: center;
+        }
       }
 
       .Download-Schedule {
