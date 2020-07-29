@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { transaction } from 'mobx';
 
 export const getDriverDay = (viewModel, day) => {
   const { activeDriver, activeWeek, driverTimeline } = viewModel;
@@ -10,11 +11,24 @@ export const getDriverDay = (viewModel, day) => {
   return currentDriverTimeline[activeWeek].days[day];
 }
 
-export const getTaskByDayTime = (viewModel, day, hour) => {
+const getTaskByDayTime = (viewModel, day, hour) => {
   const { tasks } = viewModel;
   const taskId = getDriverDay(viewModel, day).hours[hour];
   const task = tasks.get(taskId);
   return task;
+}
+
+const deleteTask = (viewModel, day, task) => {
+  const { id, driver } = task;
+  const hours = viewModel.driverTimeline[driver][viewModel.activeWeek].days[day].hours;
+  transaction(() => {
+    for (let i = 0; i < 24; ++i) {
+      if (hours[i] === id) {
+        hours[i] = null;
+      } 
+    }
+    viewModel.tasks.delete(id);
+  });
 }
 
 export default observer(({ viewModel }) => {
@@ -30,8 +44,12 @@ export default observer(({ viewModel }) => {
       let task = getTaskByDayTime(viewModel, day, hour); 
       let deleteBtn = null;
       if (!renderedTasks[task]) {
+        const _day = day;
+        const _task = task;
         renderedTasks[task] = true;
-        deleteBtn = <button onClick={() => {}}>delete</button>;
+        deleteBtn = <button onClick={() => {
+          deleteTask(viewModel, _day, _task);
+        }}>delete</button>;
       }
       if (task) {
         task = <div>{task.type} - {task.description} {deleteBtn}</div>

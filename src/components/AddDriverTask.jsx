@@ -45,7 +45,7 @@ export default ({ viewModel }) => {
       </select>
       <input required className="form-control" ref={locationInput} name="location" type="text" placeholder="Location" />
       <input required className="form-control" ref={descriptionInput} name="description" type="text" placeholder="Description" />
-      <button className='btn btn-success' onClick={() => {
+      <button style={{ width: 'inherit' }}className='btn btn-success' onClick={() => {
         const type = typeInput.current.value;
         if (!type) {
           return alert('Please select Type first');
@@ -56,26 +56,33 @@ export default ({ viewModel }) => {
         const from = Number.parseInt(hourFromSelect.current.value);
         const to = Number.parseInt(hourToSelect.current.value);
 
-        // !!!! use Number.parseInt()
-        //  for day and hour selector
-        
-        // todo: assert TO < FROM !!!!!!
         if (to < from ) {
           return alert('Invalid time range!')
         }
 
-         const driverDay = getDriverDay(viewModel, day);
+        const driverDay = getDriverDay(viewModel, day);
 
-         // todo: check overlaps
-         // !!!!!
-         // !!!!!
+        const overlappedTasks = new Set();
+        for (let i = from; i <= to; i++) {
+          const ot = driverDay.hours[i];
+          if (ot) {
+            overlappedTasks.add(ot);
+          }
+        }
+
+        if (overlappedTasks.size) {
+          if (!window.confirm('Do you wanna override existing tasks?')) {
+            return;
+          }
+        }
 
         const taskId = uuid();
         const newTask = {
           id: taskId,
           type,
           location,
-          description
+          description,
+          driver: viewModel.activeDriver
         };
 
         transaction(() => {
@@ -83,9 +90,28 @@ export default ({ viewModel }) => {
           
           // if task is overriden completely - remove it from viewModel tasks
 
-          for (let i = from; i <= to; i++) {
-              driverDay.hours[i] = taskId;
+          if (overlappedTasks.size) {
+            for (let i = 0; i < 24; ++i) {
+              const t = driverDay.hours[i];
+              if (overlappedTasks.has(t)) {
+                driverDay.hours[i] = null;
+              }
+              if (i >= from && i <= to) {
+                driverDay.hours[i] = taskId;
+              }
+            }
+            const deleted = Array.from(overlappedTasks);
+            for (let toDelete of deleted) {
+              viewModel.tasks.delete(toDelete);
+            }
+            // loop which will be deleting all tasks in set overlappedtasks and setting needed driver to task id
           }
+          else {
+            for (let i = from; i <= to; i++) {
+              driverDay.hours[i] = taskId;
+            }
+          }
+          
           
         });
       }}>Add new task</button>

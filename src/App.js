@@ -18,7 +18,7 @@ function App() {
       Ben: buildYear(),
       Ken: buildYear(),
     },
-    activeWeek: 1
+    activeWeek: 0
   }));
 
   return (
