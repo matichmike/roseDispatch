@@ -8,7 +8,7 @@ const buildWeek = () => {
   return days;
 }
 
-export const buildYear = () => {
+const buildYear = () => {
   const weeks = [];
   for (let i = 0; i < 52; ++i) {
     weeks.push({
@@ -17,3 +17,5 @@ export const buildYear = () => {
   }
   return weeks;
 }
+
+export default buildYear;
