@@ -23,7 +23,7 @@ const deleteTask = (viewModel, day, task) => {
   const { id, driver } = task;
   const hours = viewModel.driverTimeline[driver][viewModel.activeWeek].days[day].hours;
   transaction(() => {
-    for (let i = 0; i < 24; ++i) {
+    for (let i = 0; i < 24; i++) {
       if (hours[i] === id) {
         hours[i] = null;
       } 

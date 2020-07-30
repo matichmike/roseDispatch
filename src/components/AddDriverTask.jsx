@@ -90,7 +90,7 @@ export default ({ viewModel }) => {
           viewModel.tasks.set(taskId, newTask);
 
           if (overlappedTasks.size) {
-            for (let i = 0; i < 24; ++i) {
+            for (let i = 0; i < 24; i++) {
               const t = driverDay.hours[i];
               if (overlappedTasks.has(t)) {
                 driverDay.hours[i] = null;
