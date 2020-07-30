@@ -1,3 +1,4 @@
+// component that renders the active driver's timetable
 import React from 'react';
 import { observer } from 'mobx-react';
 import { transaction } from 'mobx';
@@ -32,15 +33,11 @@ const deleteTask = (viewModel, day, task) => {
 }
 
 export default observer(({ viewModel }) => {
-// razbit viewmodel make it obvious blyat, peredat active week v drivertimetable
-// loop through this raspisanie i stroit table/destructure
-// make a copy of destructured vars if (!task) => pustoy td else 31
   const rows = [];
   const renderedTasks = {};
   for (let hour = 0; hour < 25; hour++) {
     const columns = [<td>{hour}:00</td>];
     for (let day = 0; day < 7; day++) {
-        //.... todo // 34 snachala delete from timetable a potom tasks: i postavit undefined
       let task = getTaskByDayTime(viewModel, day, hour); 
       let deleteBtn = null;
       if (!renderedTasks[task]) {

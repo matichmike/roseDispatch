@@ -1,3 +1,4 @@
+// component that generates a CSV file with the active driver's schedule
 import React from 'react';
 import { Accum } from '../helpers/reportAccum';
 

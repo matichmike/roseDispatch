@@ -1,3 +1,36 @@
+# roseDispatch tool
+A tool for a dispatcher who oversees the tasks of 3 drivers.
+
+## Preview
+![“Home Page”](https://github.com/matichmike/roseDispatch/blob/master/screenshots/home.png?raw=true)
+<br/>
+<br/>
+!["Added task"](https://github.com/matichmike/roseDispatch/blob/master/screenshots/task_added_driver1.png?raw=true)
+<br/>
+<br/>
+![“Conflicting task overwrite”](https://github.com/matichmike/roseDispatch/blob/master/screenshots/task_overwrite.png?raw=true)
+<br/>
+<br/>
+![“CSV download”](https://github.com/matichmike/roseDispatch/blob/master/screenshots/csv.png?raw=true)
+
+## Setup 
+* Clone or Copy the repository
+* npm install
+* npm start
+* run http://localhost:3000/ in browser
+
+## Dependencies
+* "@testing-library/jest-dom": "^4.2.4",
+* "@testing-library/react": "^9.5.0",
+* "@testing-library/user-event": "^7.2.1",
+* "bootstrap": "^4.5.0",
+* "mobx": "^5.15.4",
+* "mobx-react": "^6.2.3",
+* "react": "^16.13.1",
+* "react-dom": "^16.13.1",
+* "react-scripts": "3.4.1",
+* "uuid": "^8.2.0"
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

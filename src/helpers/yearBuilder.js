@@ -1,3 +1,4 @@
+// helper function that builds the year as 52 weeks -> 7 weeks -> 24 hours nested structure
 const buildWeek = () => {
   const days = [];
   for (let i = 0; i < 7; ++i) {

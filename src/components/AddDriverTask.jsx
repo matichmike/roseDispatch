@@ -1,3 +1,4 @@
+//component that adds a task to the active driver during the active week
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { transaction } from 'mobx';
@@ -71,7 +72,7 @@ export default ({ viewModel }) => {
         }
 
         if (overlappedTasks.size) {
-          if (!window.confirm('Do you wanna override existing tasks?')) {
+          if (!window.confirm('Do you want to overwrite the existing tasks?')) {
             return;
           }
         }
@@ -87,8 +88,6 @@ export default ({ viewModel }) => {
 
         transaction(() => {
           viewModel.tasks.set(taskId, newTask);
-          
-          // if task is overriden completely - remove it from viewModel tasks
 
           if (overlappedTasks.size) {
             for (let i = 0; i < 24; ++i) {
@@ -104,7 +103,6 @@ export default ({ viewModel }) => {
             for (let toDelete of deleted) {
               viewModel.tasks.delete(toDelete);
             }
-            // loop which will be deleting all tasks in set overlappedtasks and setting needed driver to task id
           }
           else {
             for (let i = from; i <= to; i++) {

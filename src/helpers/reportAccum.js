@@ -1,3 +1,4 @@
+// helper functionality that serves as the accumulator for data used in CSV generation
 class AccumEntry {
 
     constructor() {

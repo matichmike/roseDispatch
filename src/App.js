@@ -9,6 +9,7 @@ import DriverScheduleCSV from './components/DriverScheduleCSV';
 import AddDriverTask from './components/AddDriverTask';
 
 function App() {
+  // viewModel object stores the states of all app's components
   const { current: viewModel } = useRef(observable({
     drivers: ["John", "Ben", "Ken"],
     tasks: new Map(),

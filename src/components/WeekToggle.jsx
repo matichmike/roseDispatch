@@ -1,3 +1,4 @@
+// component that switches the active week
 import React from 'react';
 import { observer } from 'mobx-react';
 
