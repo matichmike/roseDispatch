@@ -1,5 +1,6 @@
 # roseDispatch tool
 A tool for a dispatcher who oversees the tasks of 3 drivers.
+The app is deployed at Netlify, please click [HERE](https://boring-liskov-13d411.netlify.app)
 
 ## Preview
 ![“Home Page”](https://github.com/matichmike/roseDispatch/blob/master/screenshots/home.png?raw=true)

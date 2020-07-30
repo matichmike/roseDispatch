@@ -20,7 +20,7 @@ tasks for a given division of time. The valid divisions for which I can generate
 report are 2,4,7,14, and 28 days.
 
 # App Deployment
-* The app is deployed at Netlify
+* The app is deployed at Netlify at this [LINK](https://boring-liskov-13d411.netlify.app)
 
 # Data persistence
 * Data persistence is not implemented, the data is temporarily stored in the app state using MobX library
